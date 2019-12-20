@@ -1,0 +1,52 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+
+version: 2
+jobs:
+  build:
+    branches:
+      ignore: /doc_.*/
+    docker:
+      # Image version list, see https://hub.docker.com/r/circleci/node/tags
+      - image: circleci/node:10.17.0-browsers
+    working_directory: ~/workspace
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Print system information
+          command: |
+            echo "Node $(node -v)"
+            echo "Yarn v$(yarn --version)"
+            echo "EnvVars $(env)"
+      - run:
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Run lint
+          command: yarn lint
+      - run:
+          name: Run test
+          command: yarn test
+      - store_artifacts:
+          path: coverage
+      - run:
+          name: Run storybook:build
+          command: yarn storybook:build
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Check OSS licenses
+          command: yarn license
+      - deploy:
+          name: Deploy
+          command: yarn deploy
+      - save_cache:
+          key: cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/workspace/node_modules
+            - ~/.cache/yarn/

@@ -1,0 +1,166 @@
+---
+# ESLint rules
+# https://eslint.org/docs/rules/
+
+env:
+  browser: true
+  es6: true
+  node: true
+  jest/globals: true
+
+extends:
+  # eslint-config-airbnb
+  # https://github.com/airbnb/javascript
+  - airbnb
+
+  # TypeScript ESLint plugin recommended rules
+  # https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/src/configs/recommended.json
+  - plugin:@typescript-eslint/recommended
+
+  # eslint-plugin-import error rules
+  # https://github.com/benmosher/eslint-plugin-import/blob/master/config/errors.js
+  - plugin:import/errors
+
+  # eslint-plugin-import warning rules
+  # https://github.com/benmosher/eslint-plugin-import/blob/master/config/warnings.js
+  - plugin:import/warnings
+
+  # eslint-plugin-import typescript rules
+  # https://github.com/benmosher/eslint-plugin-import/blob/master/config/typescript.js
+  - plugin:import/typescript
+
+  - plugin:prettier/recommended
+  - prettier
+  - prettier/@typescript-eslint
+  - prettier/react
+
+globals:
+  __DEV__: true
+
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  project: ./tsconfig.json
+  sourceType: module
+
+plugins:
+  - '@typescript-eslint'
+  - jest
+  - prettier
+  - prefer-arrow
+  - react
+  - react-hooks
+  - import
+
+root: true
+
+settings:
+  import/resolver:
+    node:
+      extensions:
+        - .js
+        - .jsx
+        - .ts
+        - .tsx
+  react:
+    version: detect
+
+rules:
+  # eslint official
+  no-console: 'off'
+  no-shadow: 'off'
+  require-yield: error
+
+  ## Storybook prefers importing with absolute paths
+  no-restricted-imports:
+    - error
+    - patterns: [../*, ./*]
+
+  # @typescript-eslint
+  '@typescript-eslint/explicit-function-return-type': off
+  '@typescript-eslint/explicit-member-accessibility': off
+  '@typescript-eslint/indent': off
+  '@typescript-eslint/no-unnecessary-type-assertion': error
+  '@typescript-eslint/no-empty-interface': off
+  '@typescript-eslint/no-explicit-any': off
+  '@typescript-eslint/camelcase': off
+  '@typescript-eslint/no-namespace': error
+  '@typescript-eslint/no-non-null-assertion': off
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - varsIgnorePattern: '[Rr]eact'
+
+  # prefer-arrow
+  prefer-arrow/prefer-arrow-functions:
+    - error
+    - disallowPrototype: true
+      singleReturnOnly: true
+      classPropertiesAllowed: false
+
+  # react
+  react/jsx-filename-extension:
+    - error
+    - extensions:
+        - jsx
+        - tsx
+
+  react/jsx-one-expression-per-line: off
+  react/jsx-uses-react: error
+  react/jsx-uses-vars: error
+  react/prop-types: off
+  react/prefer-stateless-function: off
+  react/destructuring-assignment: off
+
+  # react hooks
+  react-hooks/rules-of-hooks: error
+
+  # import
+  ## Disable because the importing with the webpack alias is treated as an undeclared module
+  import/extensions:
+    - off
+    - always
+    - js: never
+      jsx: never
+      ts: never
+      tsx: never
+
+  import/prefer-default-export: off
+  import/no-unresolved: off
+  import/order:
+    - error
+    - groups:
+        - internal
+        - builtin
+        - external
+        - parent
+        - sibling
+        - index
+      newlines-between: ignore
+
+  ## For Storybook
+  import/no-extraneous-dependencies:
+    - error
+    - devDependencies:
+        - '**/test/**'
+
+  # jsx-a11y
+  jsx-a11y/label-has-for: off
+  jsx-a11y/label-has-associated-control: off
+
+  # Prettier Options
+  # https://prettier.io/docs/en/options.html
+  prettier/prettier:
+    - error
+    - printWidth: 130
+      tabWidth: 2
+      semi: false
+      singleQuote: true
+      jsxSingleQuote: false
+      trailingComma: es5
+      bracketSpacing: true
+      jsxBracketSameLine: false
+      arrowParens: avoid
+      proseWrap: preserve
+      htmlWhitespaceSensitivity: css
+      endOfLine: auto

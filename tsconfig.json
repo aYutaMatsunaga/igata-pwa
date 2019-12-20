@@ -1,0 +1,49 @@
+// TypeScript: tsconfig.json
+// https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es2015",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+
+    "lib": ["es6", "es7", "dom", "es2019"],
+
+    "baseUrl": "./src/",
+    "outDir": "./public/",
+    "paths": {
+      "@/*": ["./*"]
+    },
+
+    "allowJs": true,
+
+    // FIXME: If enable this option, webpack-dev-server gets error in `yarn start`
+    "checkJs": false,
+
+    "jsx": "react",
+    // "jsxFactory": "React.createElement",
+
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "sourceMap": true,
+
+    "strict": true, // If enable this option, following 7 options are enable.
+    // "noImplicitAny": true,
+    // "noImplicitThis": true,
+    // "alwaysStrict": true,
+    // "strictBindCallReply": true,
+    // "strictNullChecks": true,
+    // "strictFunctionTypes": true,
+    // "strictPropertyInitialization": true,
+
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+
+    "typeRoots": ["node_modules/@types", "types"]
+  },
+  "exclude": ["node_modules"]
+}

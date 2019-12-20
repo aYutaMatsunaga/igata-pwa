@@ -1,0 +1,36 @@
+@import '~@/app/common/styleVars';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: $font_base_color;
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  color: $font_base_color;
+  font-size: 1.6rem;
+  font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}
+
+input {
+  border: 1px solid $form_border_color;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border: 1px solid $form_border_color_focused;
+  transition: all 0.2s ease;
+}
