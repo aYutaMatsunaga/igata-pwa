@@ -14,6 +14,7 @@ import { configureStore } from '@/app/store'
 import { paths } from '@/app/common/paths'
 import '@/assets/css/reboot.css'
 import '@/assets/css/common.scss'
+import { registerServiceWorker } from '@/serviceWorker'
 
 if (process.env.NODE_ENV !== 'production') {
   console.info('Build with development mode')
@@ -42,3 +43,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
+
+// Learn more about service workers: http://bit.ly/CRA-PWA
+registerServiceWorker()
