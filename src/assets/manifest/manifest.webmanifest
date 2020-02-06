@@ -1,0 +1,22 @@
+{
+	"dir" : "ltr",
+	"lang" : "en",
+	"name" : "igata",
+	"scope" : "/",
+	"display" : "browser",
+	"start_url" : "https://igata-pwa.firebaseapp.com/",
+	"short_name" : "igata",
+	"theme_color" : "transparent",
+	"description" : "",
+	"orientation" : "any",
+	"background_color" : "transparent",
+	"related_applications" : [],
+	"prefer_related_applications" : false,
+	"icons" : [
+		{
+			"src": "https://igata-pwa.firebaseapp.com/favicon.ico",
+			"sizes": "16x16 24x24 32x32 64x64"
+		}],
+	"url" : "https://igata-pwa.firebaseapp.com",
+	"generated" : "true"
+}

@@ -4,13 +4,26 @@
     <meta charset="UTF-8" />
     <title><%= title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-    <meta name="Description" content="This TODO application is a demo for my Web Frontend boilerplate." />
-    <meta name="author" content="diescake" />
+    <meta name="Description" content="igata for PWA" />
+    <meta name="author" content="ufoo68" />
     <meta name="keywords" content="WebFrontend boilerplate React Redux TypeScript" />
     <base href="/" />
+    <link rel="manifest" href="/manifest.webmanifest" />
   </head>
 
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('sw.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope)
+          })
+          .catch(function(err) {
+            console.log('ServiceWorker registration failed: ', err)
+          })
+      }
+    </script>
   </body>
 </html>

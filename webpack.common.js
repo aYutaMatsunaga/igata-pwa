@@ -2,6 +2,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 /* eslint-enable */
 
 const param = {
@@ -48,6 +50,12 @@ const plugins = [
     filename: '[name].css',
     chunkFilename: '[id].css',
   }),
+  new WorkboxWebpackPlugin.GenerateSW({
+    swDest: 'sw.js',
+    clientsClaim: true,
+    skipWaiting: true,
+  }),
+  new CopyWebpackPlugin(['src/assets/manifest/manifest.webmanifest']),
 ]
 
 const common = isProd => ({
