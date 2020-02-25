@@ -5,25 +5,18 @@
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.organizeImports": false,
-    "source.fixAll": true
+    "source.fixAll.eslint": true
   },
 
   // eslint
   "eslint.enable": true,
-  "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "yaml",
-    {
-      "language": "typescript",
-      "autoFix": true
-    },
-    {
-      "language": "typescriptreact",
-      "autoFix": true
-    }
+    "typescript",
+    "typescriptreact",
   ],
   "deno.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib"

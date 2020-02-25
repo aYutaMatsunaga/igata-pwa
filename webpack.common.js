@@ -13,6 +13,7 @@ const param = {
   faviconPath: './src/assets/images/favicon.ico',
   dotEnvPath: './src/envs',
   templatePath: './src/assets/html/template.html',
+  swSrcPath: './src/assets/javascript/sw.js',
 }
 
 const optimization = {
@@ -50,10 +51,9 @@ const plugins = [
     filename: '[name].css',
     chunkFilename: '[id].css',
   }),
-  new WorkboxWebpackPlugin.GenerateSW({
+  new WorkboxWebpackPlugin.InjectManifest({
+    swSrc: param.swSrcPath,
     swDest: 'sw.js',
-    clientsClaim: true,
-    skipWaiting: true,
   }),
   new CopyWebpackPlugin(['src/assets/manifest/manifest.webmanifest']),
 ]
