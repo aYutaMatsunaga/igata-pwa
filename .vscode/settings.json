@@ -11,13 +11,7 @@
   // eslint
   "eslint.enable": true,
   "eslint.packageManager": "yarn",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "yaml",
-    "typescript",
-    "typescriptreact",
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "yaml", "typescript", "typescriptreact"],
   "deno.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib"
 }
