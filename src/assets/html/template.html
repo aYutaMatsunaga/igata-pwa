@@ -9,22 +9,66 @@
     <meta name="keywords" content="WebFrontend boilerplate React Redux TypeScript PWA" />
     <base href="/" />
     <link rel="manifest" href="/manifest.webmanifest" />
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase-messaging.js"></script>
   </head>
 
   <body>
     <div id="root"></div>
     <script>
+      const config = {
+        messagingSenderId: '532894596394',
+      }
+      firebase.initializeApp(config)
+      const messaging = firebase.messaging()
+      messaging.usePublicVapidKey('BLd0UtZNIP63HDPX07DowB4QvFLIR9KGDOANruDOU0Mm27rtB71qTcE-0yXWbZ0_vp_cBV2T7-lrEeACLYrgGSk')
+
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
           .register('sw.js')
-          .then(function(registration) {
+          .then(registration => {
             console.log('ServiceWorker registration successful with scope: ', registration.scope)
-            registration.pushManager.subscribe({userVisibleOnly: true})
+            messaging.useServiceWorker(registration)
+            messaging
+              .requestPermission()
+              .then(() => {
+                console.log('Notification permission granted.')
+              })
+              .catch(err => {
+                console.log('Unable to get permission to notify.', err)
+              })
+            registration.pushManager.subscribe({ userVisibleOnly: true })
           })
-          .catch(function(err) {
+          .catch(err => {
             console.log('ServiceWorker registration failed: ', err)
           })
       }
+      messaging
+        .getToken()
+        .then(currentToken => {
+          if (currentToken) {
+            console.log(currentToken)
+          } else {
+            console.log('No Instance ID token available. Request permission to generate one.')
+          }
+        })
+        .catch(err => {
+          console.log('An error occurred while retrieving token. ', err)
+        })
+      messaging.onMessage(payload => {
+        const notificationTitle = payload.notification.title // タイトル
+        const notificationOptions = {
+          body: payload.notification.body, // 本文
+          icon: payload.notification.icon, // アイコン
+        }
+
+        if (!('Notification' in window)) {
+          // ブラウザが通知機能に対応しているかを判定
+        } else if (Notification.permission === 'granted') {
+          // 通知許可されていたら通知する
+          const notification = new Notification(notificationTitle, notificationOptions)
+        }
+      })
     </script>
   </body>
 </html>

@@ -2,6 +2,14 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js')
+importScripts('https://www.gstatic.com/firebasejs/5.5.1/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/5.5.1/firebase-messaging.js')
+
+firebase.initializeApp({
+  messagingSenderId: '532894596394',
+})
+
+firebase.messaging()
 
 workbox.core.skipWaiting()
 workbox.core.clientsClaim()
